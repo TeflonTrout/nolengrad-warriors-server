@@ -97,6 +97,36 @@ app.get('/mint', async (req, res) => {
     }
 });
 
+app.get("ngwAll", async (req,res) => {
+    try {
+        
+        res.status(200).json()
+    } catch (e) {
+        res.status(404).json({ message: error.message})  
+    }
+})
+
+app.get('/ngw/:tokenId', async (req,res) => {
+    try {
+        if(Object.keys(req.query).length != 6) {
+            res.status(404).json({message: "Invalid tokenId or invalid tokenURI"})
+        } else {   
+            const metadata = {
+                "tokenId": req.params.tokenId,
+                "Strength": req.query.strength,
+                "Dexterity":  req.query.dexterity,
+                "Charisma":  req.query.charisma,
+                "Wisdom":  req.query.wisdom,
+                "House":  req.query.house,
+                "Rarity":  req.query.rarity,
+            }
+            res.status(200).json(metadata)
+        }
+    } catch (e) {
+        res.status(404).json({ message: error.message})
+    }
+})
+
 app.listen(8080, () => {
     console.log('listening on port 8080');
 });
