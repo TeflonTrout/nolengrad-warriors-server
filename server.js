@@ -145,9 +145,8 @@ app.get('/ngw/:tokenId', async (req,res) => {
                         trait_type: "Rarity",
                         value:  req.params.rarity
                     }
-                }
-            }
-            res.status(200).json(metadata)
+                ]}
+                res.status(200).json(metadata)
         }
     } catch (e) {
         res.status(404).json({ message: error.message})
