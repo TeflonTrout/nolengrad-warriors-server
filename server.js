@@ -97,7 +97,7 @@ app.get('/mint', async (req, res) => {
     }
 });
 
-app.get("ngwAll", async (req,res) => {
+app.get("/ngwAll", async (req,res) => {
     try {
         
         res.status(200).json({message: "path works"})
