@@ -112,13 +112,40 @@ app.get('/ngw/:tokenId', async (req,res) => {
             res.status(404).json({message: "Invalid tokenId or invalid tokenURI"})
         } else {   
             const metadata = {
-                "tokenId": req.params.tokenId,
-                "Strength": req.query.strength,
-                "Dexterity":  req.query.dexterity,
-                "Charisma":  req.query.charisma,
-                "Wisdom":  req.query.wisdom,
-                "House":  req.query.house,
-                "Rarity":  req.query.rarity,
+                "description": "Fast collection of 222 Viking Warriors preparing for war!", 
+                "external_url": `https://battle-for-icy-fjord.netlify.app/ngw/${req.params.tokenId}`, 
+                "image": "https://gateway.pinata.cloud/ipfs/QmNQ4q9AK2ynqqiRjpmWoaVFSnb9hBXN5PbLfKzmtjAJ12/elf.png", 
+                "name": `Warrior #${req.params.tokenId}`,
+                "attributes": [
+                    {
+                        trait_type: "tokenId",
+                        value:  req.params.tokenId
+                    },
+                    {
+                        trait_type: "Strength",
+                        value:  req.params.strength
+                    },
+                    {
+                        trait_type: "Dexterity",
+                        value:  req.params.dexterity
+                    },
+                    {
+                        trait_type: "Charisma",
+                        value:  req.params.charisma
+                    },
+                    {
+                        trait_type: "Wisdom",
+                        value:  req.params.wisdom
+                    },
+                    {
+                        trait_type: "House",
+                        value:  req.params.house
+                    },
+                    {
+                        trait_type: "Rarity",
+                        value:  req.params.rarity
+                    }
+                }
             }
             res.status(200).json(metadata)
         }
