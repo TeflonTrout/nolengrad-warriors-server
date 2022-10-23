@@ -100,7 +100,7 @@ app.get('/mint', async (req, res) => {
 app.get("ngwAll", async (req,res) => {
     try {
         
-        res.status(200).json()
+        res.status(200).json({message: "path works"})
     } catch (e) {
         res.status(404).json({ message: error.message})  
     }
