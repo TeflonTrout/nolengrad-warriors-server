@@ -128,5 +128,5 @@ app.get('/ngw/:tokenId', async (req,res) => {
 })
 
 app.listen(process.env.PORT || 5000, () => {
-    console.log(`listening on port ${PORT}`);
+    console.log(`APP RUNNING`);
 });
