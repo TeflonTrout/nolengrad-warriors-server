@@ -1,11 +1,13 @@
 import express from 'express'
 import FormData from "form-data";
 import fs from "fs"
+import mongoose from "mongoose";
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import axios from "axios";
 import userRoutes from './routes/nft.js';
+import Warrior from './models/warrior.js';
 
 const app = express();
 
@@ -97,10 +99,59 @@ app.get('/mint', async (req, res) => {
     }
 });
 
-app.get("/ngwAll", async (req,res) => {
+app.post("/warrior/:tokenId", async (req, res) => {
+	const warrior = new Warrior({
+        "description": "Fast collection of 222 Viking Warriors preparing for war!", 
+        "external_url": `https://battle-for-icy-fjord.netlify.app/ngw/${req.params.tokenId}`, 
+        "image": "https://gateway.pinata.cloud/ipfs/QmNQ4q9AK2ynqqiRjpmWoaVFSnb9hBXN5PbLfKzmtjAJ12/elf.png", 
+        "name": `Warrior #${req.params.tokenId}`,
+        "attributes": [
+            {
+                trait_type: "tokenId",
+                value:  req.params.tokenId
+            },
+            {
+                trait_type: "Strength",
+                value:  req.params.strength
+            },
+            {
+                trait_type: "Dexterity",
+                value:  req.params.dexterity
+            },
+            {
+                trait_type: "Charisma",
+                value:  req.params.charisma
+            },
+            {
+                trait_type: "Wisdom",
+                value:  req.params.wisdom
+            },
+            {
+                trait_type: "House",
+                value:  req.params.house
+            },
+            {
+                trait_type: "Rarity",
+                value:  req.params.rarity
+            }
+        ]})
+	await warrior.save()
+	res.status(200).json({message: warrior})
+})
+
+app.get("/warrior/:tokenId", async (req, res) => {
     try {
         
-        res.status(200).json({message: "path works"})
+        const data = await Warrior.findOne({name: `Warrior #${req.params.tokenId}`})
+        res.status(200).json({message: data})
+    } catch(e) {
+        res.status(404).json({ message: error.message})  
+    }
+})
+app.get("/getAll", async (req,res) => {
+    try {
+        const data = await Warrior.find();
+        res.status(200).json({message: data})
     } catch (e) {
         res.status(404).json({ message: error.message})  
     }
@@ -151,6 +202,20 @@ app.get('/ngw/:tokenId', async (req,res) => {
     } catch (e) {
         res.status(404).json({ message: error.message})
     }
+})
+
+const url = process.env.MONGOD_DB_URL;
+
+const connectionParams={
+    useNewUrlParser: true,
+    useUnifiedTopology: true 
+}
+mongoose.connect(url,connectionParams)
+.then( () => {
+    console.log('Connected to database ')
+})
+.catch( (err) => {
+    console.error(`Error connecting to the database. \n${err}`);
 })
 
 app.listen(process.env.PORT || 5000, () => {
