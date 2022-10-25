@@ -13,43 +13,52 @@ export const getWarriorById = async (req, res) => {
 
 export const createWarriorById = async (req, res) => {
     try {
+        const tokenId = req.params.tokenId
+        const strength = req.query.strength
+        const dexterity = req.query.dexterity
+        const charisma = req.query.charisma
+        const wisdom = req.query.wisdom
+        const house = req.query.house
+        const rarity = req.query.rarity
+        console.log(req.query)
+
         const warrior = new Warrior({
-            "description": "Fast collection of 222 Viking Warriors preparing for war!", 
-            "external_url": `https://battle-for-icy-fjord.netlify.app/ngw/${req.params.tokenId}`, 
+            "description": "Fast collection of 256 Viking Warriors preparing for war!", 
+            "external_url": `https://battle-for-icy-fjord.netlify.app/ngw/${tokenId}`, 
             "image": "https://gateway.pinata.cloud/ipfs/QmNQ4q9AK2ynqqiRjpmWoaVFSnb9hBXN5PbLfKzmtjAJ12/elf.png", 
-            "name": `Warrior #${req.params.tokenId}`,
+            "name": `Warrior #${tokenId}`,
             "attributes": [
                 {
                     trait_type: "tokenId",
-                    value:  req.params.tokenId
+                    value:  tokenId
                 },
                 {
                     trait_type: "Strength",
-                    value:  req.params.strength
+                    value: strength
                 },
                 {
                     trait_type: "Dexterity",
-                    value:  req.params.dexterity
+                    value: dexterity
                 },
                 {
                     trait_type: "Charisma",
-                    value:  req.params.charisma
+                    value: charisma
                 },
                 {
                     trait_type: "Wisdom",
-                    value:  req.params.wisdom
+                    value: wisdom
                 },
                 {
                     trait_type: "House",
-                    value:  req.params.house
+                    value: house
                 },
                 {
                     trait_type: "Rarity",
-                    value:  req.params.rarity
+                    value: rarity
                 }
             ]})
-            await warrior.save()
-            res.status(200).json({message: warrior})
+        await warrior.save()
+        res.status(200).json({message: warrior})
     } catch (e) {
         res.status(404).json({message: e.message})
     }
