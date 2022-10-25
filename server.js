@@ -38,7 +38,7 @@ app.get("/getAll", async (req,res) => {
 //             const metadata = {
 //                 "description": "Fast collection of 222 Viking Warriors preparing for war!", 
 //                 "external_url": `https://battle-for-icy-fjord.netlify.app/ngw/${req.params.tokenId}`, 
-//                 "image": "https://gateway.pinata.cloud/ipfs/QmNQ4q9AK2ynqqiRjpmWoaVFSnb9hBXN5PbLfKzmtjAJ12/elf.png", 
+//                 "image": "https://gateway.pinata.cloud/ipfs/QmfDEyRhTfqpEwtbsR3NJpgcdaLiYZAfAzmof9QESi3n8n/elf.png", 
 //                 "name": `Warrior #${req.params.tokenId}`,
 //                 "attributes": [
 //                     {
