@@ -11,6 +11,7 @@ export const getWarriorById = async (req, res) => {
     }
 }
 
+// CREATE NEW WARRIOR
 export const createWarriorById = async (req, res) => {
     try {
         const tokenId = req.params.tokenId
@@ -27,6 +28,7 @@ export const createWarriorById = async (req, res) => {
             "external_url": `https://battle-for-icy-fjord.netlify.app/ngw/${tokenId}`, 
             "image": `https://gateway.pinata.cloud/ipfs/QmXvu7prPdubtzNLwNzBs8gURxh79GjeX9jQA8PmxjGZtm/${house}${rarity}.png`, 
             "name": `Warrior #${tokenId}`,
+            "tokenId": tokenId,
             "attributes": [
                 {
                     trait_type: "tokenId",
@@ -58,6 +60,19 @@ export const createWarriorById = async (req, res) => {
                 }
             ]})
         await warrior.save()
+        res.status(200).json({message: warrior})
+    } catch (e) {
+        res.status(404).json({message: e.message})
+    }
+}
+
+// UPDATE WARRIOR DATA
+export const updateWarriorById = async (req, res) => {
+    try {
+        let warrior = await Warrior.findOneAndUpdate(
+            {tokenId: req.params.tokenId},
+            {name: req.body.newName}
+        )
         res.status(200).json({message: warrior})
     } catch (e) {
         res.status(404).json({message: e.message})

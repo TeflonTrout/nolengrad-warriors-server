@@ -11,6 +11,7 @@ const warrior = new mongoose.Schema({
 	description: String,
     external_url: String,
     image: String,
+    tokenId: Number,
     attributes: {
         type: [traits],
         validate: {
