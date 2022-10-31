@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
-import uniqueValidator from 'mongoose-unique-validator';
 
 const traits = new mongoose.Schema({
     trait_type: String,
     value: Number
 })
 
+// DEFINING WARRIOR SCHEMA
 const warrior = new mongoose.Schema({
 	name: {type: String, require:true, uniqueValidator: true},
 	description: String,

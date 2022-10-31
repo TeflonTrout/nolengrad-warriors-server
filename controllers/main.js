@@ -1,4 +1,3 @@
-import express from 'express';
 import Warrior from '../models/warrior.js';
 
 //GET USER DATA
