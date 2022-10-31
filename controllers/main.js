@@ -25,7 +25,7 @@ export const createWarriorById = async (req, res) => {
         const warrior = new Warrior({
             "description": "Fast collection of 256 Viking Warriors preparing for war!", 
             "external_url": `https://battle-for-icy-fjord.netlify.app/ngw/${tokenId}`, 
-            "image": `https://gateway.pinata.cloud/ipfs/QmfDEyRhTfqpEwtbsR3NJpgcdaLiYZAfAzmof9QESi3n8n/${house}.png`, 
+            "image": `https://gateway.pinata.cloud/ipfs/QmXvu7prPdubtzNLwNzBs8gURxh79GjeX9jQA8PmxjGZtm/${house}${rarity}.png`, 
             "name": `Warrior #${tokenId}`,
             "attributes": [
                 {
