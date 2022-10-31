@@ -4,7 +4,7 @@ import Warrior from '../models/warrior.js';
 //GET USER DATA
 export const getWarriorById = async (req, res) => {
     try {
-        const data = await Warrior.findOne({name: `Warrior #${req.params.tokenId}`})
+        const data = await Warrior.findOne({tokenId: req.params.tokenId})
         res.status(200).json({message: data})
     } catch(e) {
         res.status(404).json({ message: error.message})  
